@@ -1,0 +1,57 @@
+@startuml uno con le classi
+
+```mermaid
+classDiagram
+    class Card {
+        +String color
+        +String value
+        +__init__(color, value)
+        +__repr__()
+    }
+
+    class Deck {
+        +List<Card> cards
+        +__init__()
+        +create_deck()
+        +shuffle_deck()
+        +draw_card()
+        +get_top_card()
+    }
+
+    class Player {
+        +String name
+        +List<Card> cards
+        +Boolean said_uno
+        +__init__(name)
+        +add_card(card)
+        +remove_card(card)
+        +has_card(card)
+    }
+
+    class Game {
+        +Deck deck
+        +Player player
+        +Player opponent
+        +List<Card> played_cards
+        +Int turn_count
+        +String last_player_name
+        +Int last_played_card_turn
+        +String turn_player_said_uno
+        +__init__()
+        +setup_players()
+        +get_last_played_card()
+        +can_execute_turn(player_name)
+        +can_card_be_played(card)
+        +execute_card_effect(target_player)
+        +execute_player_turn(action, played_card)
+        +execute_opponent_turn()
+        +get_winner()
+    }
+
+    Card <|-- Deck
+    Player "1" -- "0..*" Card : has_cards
+    Game "1" -- "1" Player : player
+    Game "1" -- "1" Player : opponent
+    Game "1" -- "0..*" Card : played_cards
+
+@enduml
